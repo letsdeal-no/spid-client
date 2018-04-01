@@ -2,6 +2,9 @@ language: php
 php:
   - "7.1"
 
+before_script:
+  - pecl install ast
+
 script:
   - composer install -n
-  - vendor/bin/phpspec run
+  - vendor/bin/phing
