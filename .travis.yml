@@ -2,9 +2,31 @@ language: php
 php:
   - "7.1"
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 before_script:
   - pecl install ast
+  - bash -xe ci/set-composer.sh
 
 script:
   - composer install -n
   - vendor/bin/phing
+
+deploy:
+  - provider: script
+    script: bash -xe ci/deploy.sh dev-master
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: script
+    script: bash -xe ci/deploy.sh dev
+    skip_cleanup: true
+    on:
+      branch: develop
+  - provider: script
+    script: bash -xe ci/deploy.sh $TRAVIS_TAG
+    skip_cleanup: true
+    on:
+      tags: true
