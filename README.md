@@ -22,3 +22,18 @@ There are currently two implementations of this interface:
 1. `\SPiD\SimpleAuthTokenRepository` - based on Guzzle
 2. `\SPiD\RedisAuthTokenRepository` - based on the one above, but caching authorization token in Redis using [predis](https://github.com/nrk/predis) library
 
+## Installation
+Add Schibsted's Artifactory to your repositories list in composer.json:
+```json
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://artifacts.schibsted.io/artifactory/api/composer/php-local"
+        }
+    ]
+```
+And run:
+```
+composer require letsdeal-no/spid-client:^1.0.0
+```
+
